@@ -24,6 +24,16 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+//whoami path
+app.get('/api/whoami', function(req, res) {
+  //req data is stored in a {} array called headers
+  const { headers } = req;
+  //response json will contain key ipaddress from request that is req.ip
+  //language key and value would be found in headers key "accept-language"
+  //software key and value would be found in headers key "user-agent"
+  res.json({ ipaddress: req.ip, language: headers["accept-language"],software: headers["user-agent"] });
+});
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
